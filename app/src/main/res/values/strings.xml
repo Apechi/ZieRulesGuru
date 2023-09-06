@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ZieRulesGuru</string>
+    <string name="title_activity_guru_mapel">GuruMapelActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_wali_kelas">WaliKelasActivity</string>
+</resources>
