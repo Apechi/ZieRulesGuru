@@ -1,5 +1,6 @@
 package com.example.zierulesguru
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.zierulesguru.barcodeScanner.ScannedData
 import com.example.zierulesguru.databinding.ActivityScanBinding
+import com.example.zierulesguru.guru_mapel.GuruMapelActivity
 import com.example.zierulesguru.guru_mapel.ui.dashboard.DashboardFragment
 import com.google.gson.Gson
 
@@ -33,6 +35,8 @@ class ScanActivity : AppCompatActivity() {
     lateinit var binding: ActivityScanBinding
     lateinit var codeScanner: CodeScanner
     lateinit var tinyDB: TinyDB
+    lateinit var arrayNama: ArrayList<String>
+    lateinit var arrayId: ArrayList<Int>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +55,10 @@ class ScanActivity : AppCompatActivity() {
         }
 
         tinyDB = TinyDB(this)
+
+        arrayNama = tinyDB.getListString("siswaScannedList_nama")
+        arrayId = tinyDB.getListInt("siswaScannedList_id")
+
 
     }
 
@@ -85,9 +93,9 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSiswa(siswaNis: String) {
+    private fun getSiswa(siswaCode: String) {
         val queue = Volley.newRequestQueue(this)
-        val  url = "${MyApplication.BASE_URL}/student/${siswaNis}"
+        val  url = "${MyApplication.BASE_URL}/student/${siswaCode}"
         var sameResult: Boolean = false
         val jsonObjectRequest = object : JsonObjectRequest(Method.GET, url, null, {
                 res ->
@@ -102,10 +110,12 @@ class ScanActivity : AppCompatActivity() {
                         }
                     }
                     if (!sameResult) {
-                        tinyDB.putListString("siswaScannedList_nama", arrayListOf(scannedSiswa.name));
-                        tinyDB.putListInt("siswaScannedList_id", arrayListOf(scannedSiswa.id));
-                        Toast.makeText(this, tinyDB.getListString("siswaScannedList_nama").size, Toast.LENGTH_SHORT).show();
-                        switchToFragment(DashboardFragment());
+                        arrayNama.add(scannedSiswa.name)
+                        arrayId.add(scannedSiswa.id)
+                        tinyDB.putListString("siswaScannedList_nama", arrayNama);
+                        tinyDB.putListInt("siswaScannedList_id", arrayId);
+                        startActivity(Intent(this, GuruMapelActivity::class.java))
+
                     } else {
                         Toast.makeText(this, "Siswa Sudah Di Scan", Toast.LENGTH_SHORT).show()
                         codeScanner.startPreview()
@@ -132,10 +142,6 @@ class ScanActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
     }
 
-    private fun switchToFragment(fragment: Fragment) {
-        val manager = supportFragmentManager
-        manager.beginTransaction().replace(R.id.navigation_dashboard, fragment).commit()
-    }
 
 
     override fun onRequestPermissionsResult(
