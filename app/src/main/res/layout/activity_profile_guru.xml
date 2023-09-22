@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".walikelas.ui.ProfileActivityGuru">
+    tools:context=".ProfileActivityGuru">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,24 +14,76 @@
         android:orientation= "vertical">
 
         <FrameLayout
-            android:layout_gravity="center"
-            android:foregroundGravity="center"
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
-            android:background="@color/teal_700"
             android:layout_height="match_parent"
-            >
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:foregroundGravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="15dp"
-                android:src="@mipmap/ic_launcher" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="15dp"
+                    android:src="@mipmap/ic_launcher" />
 
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/namaGuru"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Lengkap"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="email@gmail.com"
+                    android:id="@+id/emailGuru"
+                    android:textAlignment="center"
+                    android:textSize="17dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="wali-kelas"
+                    android:id="@+id/role"
+                    android:textAlignment="center"
+                    android:textSize="17dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Log Out"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue_smakzei"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/buttonDataSiswa"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Data Siswa"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue_smakzei"
+                    android:layout_marginTop="50dp"/>
+
+            </LinearLayout>
 
 
         </FrameLayout>

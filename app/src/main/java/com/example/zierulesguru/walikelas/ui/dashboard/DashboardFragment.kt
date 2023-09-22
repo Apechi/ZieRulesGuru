@@ -13,12 +13,12 @@ import com.example.zierulesguru.TinyDB
 import com.example.zierulesguru.barcodeScanner.SubmitPelangganranActivity
 import com.example.zierulesguru.barcodeScanner.SubmitPrestasiActivity
 import com.example.zierulesguru.barcodeScanner.SubmitTugasActivity
-import com.example.zierulesguru.databinding.FragmentDashboard2Binding
+import com.example.zierulesguru.databinding.FragmentDashboardBinding
 
 
 class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentDashboard2Binding? = null
+    private var _binding: FragmentDashboardBinding? = null
     lateinit private var tinyDB: TinyDB
     lateinit private var siswaScannedList_id: ArrayList<Int>
 
@@ -34,7 +34,7 @@ class DashboardFragment : Fragment() {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        _binding = FragmentDashboard2Binding.inflate(inflater, container, false)
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         binding.scanButton.setOnClickListener {

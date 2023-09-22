@@ -1,5 +1,6 @@
 package com.example.zierulesguru.walikelas
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,10 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.zierulesguru.MyApplication
-import com.example.zierulesguru.ProfileGuru
-import com.example.zierulesguru.R
-import com.example.zierulesguru.TinyDB
+import com.example.zierulesguru.*
 import com.example.zierulesguru.databinding.ActivityWaliKelasBinding
 import com.example.zierulesguru.list_data.ListPelanggaran
 import com.example.zierulesguru.list_data.ListPrestasi
@@ -158,6 +156,14 @@ class WaliKelasActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        if (!tinyDb.getBoolean("is_login")) {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
     public fun getProfile() {
         val queue = Volley.newRequestQueue(this)
         val  url = "${MyApplication.BASE_URL}/teacher/profile"
@@ -169,7 +175,7 @@ class WaliKelasActivity : AppCompatActivity() {
                 val profile = gson.fromJson(res.toString(), ProfileGuru::class.java)
                 if (profile.status == 200) {
 
-                    var image = "${MyApplication.BASE_URL}${profile.dataTeacher.image}"
+                    var image = "${MyApplication.URL}${profile.dataTeacher.image}"
                     image = image.replace("public", "storage")
 
                     //put data to tinyDB
