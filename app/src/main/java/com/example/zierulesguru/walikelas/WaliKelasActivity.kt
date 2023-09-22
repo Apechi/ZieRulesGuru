@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.zierulesguru.MyApplication
+import com.example.zierulesguru.ProfileGuru
 import com.example.zierulesguru.R
 import com.example.zierulesguru.TinyDB
 import com.example.zierulesguru.databinding.ActivityWaliKelasBinding
@@ -36,6 +37,7 @@ class WaliKelasActivity : AppCompatActivity() {
         getPelanggaran()
         getPrestasi()
         getTask()
+        getProfile()
 
         val navView: BottomNavigationView = binding.navView
 
@@ -133,6 +135,49 @@ class WaliKelasActivity : AppCompatActivity() {
                 if (listTask.status == 200) {
 
                     tinyDb.putListObject("listDataTugas", listTask.dataTask as ArrayList<Any>)
+
+                } else {
+                    Toast.makeText(this, res.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
+            }
+        }, {
+                err ->
+            Toast.makeText(this, err.toString(), Toast.LENGTH_SHORT).show()
+        }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                val token = "Bearer ${tinyDb.getString("token")}"
+                headers["Authorization"] = token
+                return headers
+            }
+        }
+        queue.add(jsonObjectRequest)
+    }
+
+    public fun getProfile() {
+        val queue = Volley.newRequestQueue(this)
+        val  url = "${MyApplication.BASE_URL}/teacher/profile"
+
+        val jsonObjectRequest = object : JsonObjectRequest(Method.GET, url, null, {
+                res ->
+            try {
+                val gson = Gson();
+                val profile = gson.fromJson(res.toString(), ProfileGuru::class.java)
+                if (profile.status == 200) {
+
+                    var image = "${MyApplication.BASE_URL}${profile.dataTeacher.image}"
+                    image = image.replace("public", "storage")
+
+                    //put data to tinyDB
+                    tinyDb.putString("emailGuru", profile.dataTeacher.email)
+                    tinyDb.putString("namaGuru", profile.dataTeacher.name)
+                    tinyDb.putString("roleGuru", profile.dataTeacher.role)
+                    tinyDb.putString("imageGuru", image)
+
 
                 } else {
                     Toast.makeText(this, res.toString(), Toast.LENGTH_SHORT).show()
