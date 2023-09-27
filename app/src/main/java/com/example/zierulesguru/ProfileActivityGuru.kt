@@ -27,8 +27,6 @@ class ProfileActivityGuru : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
         binding.namaGuru.text = tinyDB.getString("namaGuru");
         binding.emailGuru.text = tinyDB.getString("emailGuru")
         binding.role.text = tinyDB.getString("roleGuru")

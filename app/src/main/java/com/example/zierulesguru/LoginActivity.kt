@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import org.json.JSONObject
 
 data class DataProfile(
+    val status: Int,
     val message: String,
     val role: String,
     val token: String,
@@ -76,20 +77,26 @@ class LoginActivity : AppCompatActivity() {
                 try {
                     val gson = Gson()
                     val profileSaya = gson.fromJson(res.toString(), DataProfile::class.java)
-                    val token = profileSaya.token
-                    val role = profileSaya.role
-                    tinyDB.putString("token", token)
-                    tinyDB.putString("role", role)
-                    tinyDB.putBoolean("is_login", true)
-                    when (role) {
-                        "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
-                        "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))
+                    if (profileSaya.status == 200) {
+                        val token = profileSaya.token
+                        val role = profileSaya.role
+                        tinyDB.putString("token", token)
+                        tinyDB.putString("role", role)
+                        tinyDB.putBoolean("is_login", true)
+                        when (role) {
+                            "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
+                            "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))
+                        }
+                    } else {
+                        Toast.makeText(this, "Email Atau Password Salah", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: java.lang.Exception) {
-                    Log.d("error", e.toString())
+                    Toast.makeText(this, "Email Atau Password Salah", Toast.LENGTH_SHORT).show()
+
                 }
         },{err->
-                Log.d("error", err.toString())
+
+                Toast.makeText(this, "Email Atau Password Salah", Toast.LENGTH_SHORT).show()
         }) {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
