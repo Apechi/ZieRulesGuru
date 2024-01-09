@@ -32,11 +32,6 @@ class WaliKelasActivity : AppCompatActivity() {
 
         tinyDb = TinyDB(this)
 
-        getPelanggaran()
-        getPrestasi()
-        getTask()
-        getProfile()
-
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_wali_kelas)
@@ -159,9 +154,16 @@ class WaliKelasActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+
+
         if (!tinyDb.getBoolean("is_login")) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
+        getPelanggaran()
+        getPrestasi()
+        getTask()
+        getProfile()
     }
 
     public fun getProfile() {

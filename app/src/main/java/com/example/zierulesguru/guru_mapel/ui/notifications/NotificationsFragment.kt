@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBindings
@@ -74,6 +75,20 @@ class NotificationsFragment : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
 

@@ -40,11 +40,6 @@ class GuruMapelActivity : AppCompatActivity() {
 
         tinyDb = TinyDB(this)
 
-        getPelanggaran()
-        getPrestasi()
-        getTask()
-        getProfile()
-
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_guru_mapel)
@@ -170,6 +165,11 @@ class GuruMapelActivity : AppCompatActivity() {
         if (!tinyDb.getBoolean("is_login")) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
+        getPelanggaran()
+        getPrestasi()
+        getTask()
+        getProfile()
     }
 
     public fun getProfile() {

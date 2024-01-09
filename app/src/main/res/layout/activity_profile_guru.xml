@@ -1,98 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ProfileActivityGuru">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent"
-        android:orientation= "vertical">
 
-        <FrameLayout
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:elevation="4dp"
+        android:text="Profile"
+        android:textAlignment="center"
+
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:translationY="-15dp"
+        app:cardElevation="0dp"
+        android:layout_height="374dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/blue_smakzei"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" >
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:foregroundGravity="center">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/role"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:text="wali-kelas"
+                android:textAlignment="center"
+                android:textSize="17dp"
+                app:layout_constraintTop_toBottomOf="@+id/namaGuru"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emailGuru"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="email@gmail.com"
+                android:textAlignment="center"
+                android:textSize="17dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/role"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/namaGuru"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Nama Lengkap"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonDataSiswa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/blue_smakzei"
+                android:text="Data Siswa"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailGuru" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        app:civ_border_width="3dp"
+        app:civ_border_color="#f18c06"
+        android:elevation="10dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:translationY="60dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout"
+        android:layout_width="205dp"
+
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/design_default_color_error"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="15dp"
-                    android:src="@mipmap/ic_launcher" />
-
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:id="@+id/namaGuru"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Lengkap"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="email@gmail.com"
-                    android:id="@+id/emailGuru"
-                    android:textAlignment="center"
-                    android:textSize="17dp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="wali-kelas"
-                    android:id="@+id/role"
-                    android:textAlignment="center"
-                    android:textSize="17dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/logout"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Log Out"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/blue_smakzei"
-                    android:layout_height="wrap_content"/>
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:id="@+id/buttonDataSiswa"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Data Siswa"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/blue_smakzei"
-                    android:layout_marginTop="50dp"/>
-
-            </LinearLayout>
-
-
-        </FrameLayout>
-
-
-    </LinearLayout>
-
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

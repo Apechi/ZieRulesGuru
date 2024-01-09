@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -89,6 +90,7 @@ class DashboardFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
         if (tinyDB.getListString("siswaScannedList_nama").count() == 0) {
             ButtonActivate(false)
@@ -100,6 +102,16 @@ class DashboardFragment : Fragment() {
 
         getSiswa();
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
     private fun ButtonActivate(state: Boolean) {

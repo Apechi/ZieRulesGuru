@@ -29,7 +29,14 @@ class ProfileActivityGuru : AppCompatActivity() {
 
         binding.namaGuru.text = tinyDB.getString("namaGuru");
         binding.emailGuru.text = tinyDB.getString("emailGuru")
-        binding.role.text = tinyDB.getString("roleGuru")
+        var roleValue: String =  tinyDB.getString("roleGuru")
+        binding.role.text = roleValue
+
+        if (roleValue == "guru-mapel") {
+            binding.buttonDataSiswa.visibility = View.GONE
+        }
+
+
         Glide.with(this)
             .load(tinyDB.getString("imageGuru"))
             .into(binding.profileImage)
