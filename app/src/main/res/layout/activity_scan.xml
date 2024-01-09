@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,12 +9,43 @@
     tools:context=".ScanActivity">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="125dp"
+        android:contentDescription="Kembali"
+        android:backgroundTint="@color/design_default_color_error"
+        android:src="@drawable/baseline_stop_50"
+        app:layout_constraintBottom_toBottomOf="@+id/scanner_view"
+        app:layout_constraintEnd_toEndOf="@+id/scanner_view"
+        app:layout_constraintStart_toStartOf="@id/scanner_view" />
+
+    <TextView
+        android:id="@+id/scanText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="170dp"
+        android:elevation="10dp"
+        android:textSize="20dp"
+        android:text="Scanning..."
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scanner_view" />
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:autoFocusButtonVisible="true"
-        app:flashButtonVisible="true" />
+        app:flashButtonVisible="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
 
-</LinearLayout>
+    </com.budiyev.android.codescanner.CodeScannerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

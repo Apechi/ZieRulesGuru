@@ -19,6 +19,7 @@ import com.example.zierulesguru.barcodeScanner.ScannedData
 import com.example.zierulesguru.databinding.ActivityScanBinding
 import com.example.zierulesguru.guru_mapel.GuruMapelActivity
 import com.example.zierulesguru.guru_mapel.ui.dashboard.DashboardFragment
+import com.example.zierulesguru.walikelas.WaliKelasActivity
 import com.google.gson.Gson
 
 data class SiswaScanned(
@@ -59,12 +60,20 @@ class ScanActivity : AppCompatActivity() {
         arrayNama = tinyDB.getListString("siswaScannedList_nama")
         arrayId = tinyDB.getListInt("siswaScannedList_id")
 
+        binding.stopButton.setOnClickListener {
+            val role = tinyDB.getString("role")
+            when (role) {
+                "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
+                "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))
+            }
+        }
 
     }
 
     override fun onStart() {
         super.onStart()
         qrCodeScanner()
+        binding.scanText.text = "Scanning..."
     }
 
     private fun qrCodeScanner() {
@@ -90,6 +99,7 @@ class ScanActivity : AppCompatActivity() {
         }
         binding.scannerView.setOnClickListener {
             codeScanner.startPreview()
+
         }
     }
 
@@ -114,8 +124,8 @@ class ScanActivity : AppCompatActivity() {
                         arrayId.add(scannedSiswa.id)
                         tinyDB.putListString("siswaScannedList_nama", arrayNama);
                         tinyDB.putListInt("siswaScannedList_id", arrayId);
-                        startActivity(Intent(this, GuruMapelActivity::class.java))
-
+                        binding.scanText.text = "Terscan: ${arrayId.count()}"
+                        codeScanner.startPreview()
                     } else {
                         Toast.makeText(this, "Siswa Sudah Di Scan", Toast.LENGTH_SHORT).show()
                         codeScanner.startPreview()

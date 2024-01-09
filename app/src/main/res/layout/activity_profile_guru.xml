@@ -14,7 +14,9 @@
         android:layout_marginTop="32dp"
         android:elevation="4dp"
         android:text="Profile"
+
         android:textAlignment="center"
+
 
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -31,6 +33,7 @@
         android:layout_height="374dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="16dp"
+
         android:backgroundTint="@color/blue_smakzei"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,6 +42,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" >
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="fill_parent"
+            android:scaleType="centerCrop"
+
+            android:layout_height="fill_parent"
+            android:src="@drawable/bgpattern" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
