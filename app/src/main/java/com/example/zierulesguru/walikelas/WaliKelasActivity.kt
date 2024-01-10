@@ -9,7 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.Volley
 import com.example.zierulesguru.*
 import com.example.zierulesguru.databinding.ActivityWaliKelasBinding
@@ -17,7 +19,11 @@ import com.example.zierulesguru.list_data.ListPelanggaran
 import com.example.zierulesguru.list_data.ListPrestasi
 import com.example.zierulesguru.list_data.ListTugas
 import com.google.gson.Gson
+import org.json.JSONObject
 import java.util.ArrayList
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 class WaliKelasActivity : AppCompatActivity() {
 
@@ -37,12 +43,8 @@ class WaliKelasActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_wali_kelas)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
         navView.setupWithNavController(navController)
     }
 
@@ -77,7 +79,9 @@ class WaliKelasActivity : AppCompatActivity() {
                 headers["Authorization"] = token
                 return headers
             }
+
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -113,6 +117,7 @@ class WaliKelasActivity : AppCompatActivity() {
                 return headers
             }
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -147,7 +152,9 @@ class WaliKelasActivity : AppCompatActivity() {
                 headers["Authorization"] = token
                 return headers
             }
+
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -159,6 +166,7 @@ class WaliKelasActivity : AppCompatActivity() {
         if (!tinyDb.getBoolean("is_login")) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
 
         getPelanggaran()
         getPrestasi()
@@ -206,6 +214,7 @@ class WaliKelasActivity : AppCompatActivity() {
                 return headers
             }
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 }

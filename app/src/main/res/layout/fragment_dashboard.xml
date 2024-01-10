@@ -4,106 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_smakzei"
     android:orientation="vertical"
     tools:context=".guru_mapel.ui.dashboard.DashboardFragment">
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="720dp"
+        android:layout_marginBottom="-35dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <co.lujun.androidtagview.TagContainerLayout
         android:id="@+id/tagContainer"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="369dp"
+        android:layout_height="268dp"
         android:layout_alignParentBottom="true"
-        app:horizontal_interval="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024"
-        app:vertical_interval="5dp"
-        app:tag_corner_radius="5dp"
+        android:layout_marginTop="130dp"
+
+        android:elevation="10dp"
         android:padding="5dp"
-        app:tag_background_color="#00000000"
         app:container_background_color="#00000000"
-        app:tag_border_width="1dp"
+        app:horizontal_interval="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tag_background_color="#00000000"
+
+        app:tag_border_width="2dp"
+        app:tag_corner_radius="5dp"
         app:tag_horizontal_padding="10dp"
-        app:tag_vertical_padding="8dp" />
+        app:tag_vertical_padding="8dp"
+        app:vertical_interval="5dp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_pelanggaran"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+         android:elevation="2dp"
+        android:padding="8dp"
+        android:layout_marginStart="32dp"
+       android:background="@drawable/roundedcorners"
+        android:layout_marginBottom="32dp"
+        android:text="Pelanggaran"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:drawableTop="@drawable/baseline_do_disturb_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btn_prestasi"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:elevation="2dp"
+        android:background="@drawable/roundedcorners"
+        android:layout_marginBottom="32dp"
+        android:text="Prestasi"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:drawableTop="@drawable/baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_tugas"
+        app:layout_constraintStart_toEndOf="@+id/btn_pelanggaran" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_tugas"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="32dp"
+        android:text="Tugas"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:drawableTop="@drawable/baseline_add_home_work_24"
+
+        android:elevation="2dp"
+
+        android:background="@drawable/roundedcorners"
+
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scan_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout">
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#f18c06"
+        android:contentDescription="Scan Siswa"
+        android:src="@drawable/ic_code_scanner_auto_focus_on"
+        app:borderWidth="0dp"
+        app:fabCustomSize="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagContainer"
+        app:maxImageSize="30dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#E63E3E"
+        android:src="@drawable/baseline_cleaning_services_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagContainer" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_pelanggaran"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="PLGRN" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_prestasi"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginHorizontal="10dp"
-                android:text="PRSTSI" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_tugas"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="TGS" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        tools:layout_editor_absoluteY="50dp">
-
-        <ImageButton
-            android:id="@+id/scan_button"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="48dp"
-            android:src="@drawable/ic_code_scanner_auto_focus_on"
-            android:text="Scan"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/clear_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="56dp"
-            android:text="clear"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/scan_button" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
+    <TextView
+        android:id="@+id/namaSiswaKumpulan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="10dp"
+        android:text="Nama Siswa:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/tagContainer"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

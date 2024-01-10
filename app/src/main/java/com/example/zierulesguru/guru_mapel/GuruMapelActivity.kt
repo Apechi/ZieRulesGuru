@@ -9,7 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.Volley
 import com.example.zierulesguru.*
 
@@ -19,8 +21,11 @@ import com.example.zierulesguru.list_data.ListPrestasi
 import com.example.zierulesguru.list_data.ListTugas
 import com.example.zierulesguru.walikelas.WaliKelasActivity
 import com.google.gson.Gson
+import org.json.JSONObject
 import java.util.ArrayList
-
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 
 data class SubmitMessage(val status: Int, val message: String)
@@ -45,12 +50,7 @@ class GuruMapelActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_guru_mapel)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navView.setupWithNavController(navController)
     }
 
@@ -86,6 +86,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 return headers
             }
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -121,6 +122,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 return headers
             }
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -156,6 +158,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 return headers
             }
         }
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
     }
 
@@ -212,7 +215,10 @@ class GuruMapelActivity : AppCompatActivity() {
                 return headers
             }
         }
+        val future = RequestFuture.newFuture<JSONObject>()
+        jsonObjectRequest.setRetryPolicy(DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest)
+
     }
 
 }

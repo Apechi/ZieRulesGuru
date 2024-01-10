@@ -70,7 +70,7 @@ class DashboardFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
 
         if (tinyDB.getListString("siswaScannedList_nama").count() == 0) {
             ButtonActivate(false)
@@ -84,15 +84,7 @@ class DashboardFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
 
     private fun ButtonActivate(state: Boolean) {
         binding.btnPrestasi.isClickable = state

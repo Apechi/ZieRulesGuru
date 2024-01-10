@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -53,6 +54,10 @@ class NotificationsFragment : Fragment() {
             showLogoutConfirmationDialog()
         }
 
+        binding.buttonDataSiswa.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur Belum Tersedia", Toast.LENGTH_SHORT).show()
+        }
+
         return root
     }
 
@@ -77,19 +82,7 @@ class NotificationsFragment : Fragment() {
         dialog.show()
     }
 
-    override fun onStart() {
-        super.onStart()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
 
 
     override fun onDestroyView() {

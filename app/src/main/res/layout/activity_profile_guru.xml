@@ -105,11 +105,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/buttonDataSiswa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                app:cornerRadius="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/blue_smakzei"
@@ -140,13 +141,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/logout"
         android:layout_width="205dp"
+        app:cornerRadius="10dp"
 
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/design_default_color_error"
+        android:backgroundTint="#E63E3E"
         android:text="Log Out"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

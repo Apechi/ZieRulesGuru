@@ -60,19 +60,11 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
         getHistory()
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
 
     public fun getHistory() {
         val queue = Volley.newRequestQueue(requireContext())
@@ -84,6 +76,9 @@ class HomeFragment : Fragment() {
                 val gson = Gson();
                 val listHistory = gson.fromJson(res.toString(), HistoryScan::class.java)
                 if (listHistory.status == 200) {
+                    if (listHistory.dataHistoryScan.count() <= 0) {
+                        binding.checkData.text = "Data Tidak Ada!"
+                    }
                     val adapter = scanHistoryAdapter(listHistory.dataHistoryScan)
                     recycleView.layoutManager = LinearLayoutManager(requireContext())
                     recycleView.adapter = adapter
