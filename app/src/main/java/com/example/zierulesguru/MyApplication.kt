@@ -4,7 +4,7 @@ import android.app.Application
 
 open class MyApplication : Application() {
     companion object{
-        val BASE_URL = "https://ebda-120-89-90-59.ngrok-free.app/api"
-        val URL = "https://ebda-120-89-90-59.ngrok-free.app/"
+        val BASE_URL = "https://ce10-120-89-90-61.ngrok-free.app/api"
+        val URL = "https://ce10-120-89-90-61.ngrok-free.app/"
     }
 }

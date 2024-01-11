@@ -46,6 +46,11 @@ class WaliKelasActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
+
+        getPelanggaran()
+        getPrestasi()
+        getTask()
+        getProfile()
     }
 
     public fun getPelanggaran() {
@@ -63,10 +68,11 @@ class WaliKelasActivity : AppCompatActivity() {
 
                 } else {
                     Toast.makeText(this, res.toString(), Toast.LENGTH_SHORT).show()
+
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
 
             }
         }, {
@@ -103,7 +109,8 @@ class WaliKelasActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
+
 
             }
         }, {
@@ -139,7 +146,8 @@ class WaliKelasActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
+
 
             }
         }, {
@@ -168,10 +176,7 @@ class WaliKelasActivity : AppCompatActivity() {
         }
 
 
-        getPelanggaran()
-        getPrestasi()
-        getTask()
-        getProfile()
+
     }
 
     public fun getProfile() {
@@ -200,7 +205,8 @@ class WaliKelasActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
+
 
             }
         }, {

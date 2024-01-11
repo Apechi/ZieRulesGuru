@@ -52,6 +52,12 @@ class GuruMapelActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         navView.setupWithNavController(navController)
+
+        getPelanggaran()
+        getPrestasi()
+        getTask()
+        getProfile()
+
     }
 
     public fun getPelanggaran() {
@@ -72,7 +78,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
 
             }
         }, {
@@ -108,7 +114,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
 
             }
         }, {
@@ -144,7 +150,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
 
             }
         }, {
@@ -169,10 +175,7 @@ class GuruMapelActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        getPelanggaran()
-        getPrestasi()
-        getTask()
-        getProfile()
+
     }
 
     public fun getProfile() {
@@ -201,7 +204,7 @@ class GuruMapelActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                println(e.message)
 
             }
         }, {

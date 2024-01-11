@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.swipeRefresh.isRefreshing = false
+
 
         getHistory()
     }
@@ -66,6 +66,7 @@ class HomeFragment : Fragment() {
 
 
     public fun getHistory() {
+        binding.swipeRefresh.isRefreshing = true
         val queue = Volley.newRequestQueue(requireContext())
         val  url = "${MyApplication.BASE_URL}/teacher/history/scan"
 
@@ -75,6 +76,7 @@ class HomeFragment : Fragment() {
                 val gson = Gson();
                 val listHistory = gson.fromJson(res.toString(), HistoryScan::class.java)
                 if (listHistory.status == 200) {
+                    binding.swipeRefresh.isRefreshing = false
                     if (listHistory.dataHistoryScan.count() <= 0) {
                         binding.checkData.text = "Data Tidak Ada!"
                     }

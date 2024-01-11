@@ -17,6 +17,7 @@ import com.example.zierulesguru.guru_mapel.GuruMapelActivity
 import com.example.zierulesguru.guru_mapel.SubmitMessage
 import com.example.zierulesguru.list_data.dataAchievements
 import com.example.zierulesguru.list_data.dataTask
+import com.example.zierulesguru.walikelas.WaliKelasActivity
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.time.LocalDate
@@ -97,7 +98,11 @@ class SubmitTugasActivity : AppCompatActivity() {
                         tinyDB.putListString("siswaScannedList_nama", ArrayList() )
                         tinyDB.putListInt("siswaScannedList_id", ArrayList() )
                         Toast.makeText(this, submitMesssage.message, Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, GuruMapelActivity::class.java))
+                        val role = tinyDB.getString("role")
+                        when (role) {
+                            "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
+                            "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))
+                        }
 
                     } else {
                         Toast.makeText(this, res.toString(), Toast.LENGTH_SHORT).show()

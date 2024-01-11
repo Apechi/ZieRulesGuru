@@ -39,10 +39,20 @@ class scanHistoryAdapter(
             holder.type.setBackgroundColor(Color.parseColor("#477CAC"))
         }
 
-        holder.name.text = listDataScanHistory.name
+        holder.name.text = truncateString(listDataScanHistory.name, 5);
         holder.tanggal.text = listDataScanHistory.date
         holder.siswa.text = listDataScanHistory.student
 
     }
+
+    fun truncateString(str: String, limit: Int): String {
+        val words = str.split(" ")
+        return if (words.size > limit) {
+            "${words.slice(0 until limit).joinToString(" ")}..."
+        } else {
+            str
+        }
+    }
+
 
 }

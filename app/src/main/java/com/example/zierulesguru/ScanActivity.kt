@@ -68,11 +68,13 @@ class ScanActivity : AppCompatActivity() {
             }
         }
 
+        qrCodeScanner()
+
     }
 
     override fun onStart() {
         super.onStart()
-        qrCodeScanner()
+
         binding.scanText.text = "Scanning..."
     }
 
