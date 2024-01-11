@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
 
 
     public fun getHistory() {
+        binding.swipeRefresh.isRefreshing = true
         val queue = Volley.newRequestQueue(requireContext())
         val  url = "${MyApplication.BASE_URL}/teacher/history/scan"
 

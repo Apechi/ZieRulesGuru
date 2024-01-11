@@ -68,7 +68,7 @@ class ScanActivity : AppCompatActivity() {
             }
         }
 
-        qrCodeScanner()
+
 
     }
 
@@ -76,6 +76,7 @@ class ScanActivity : AppCompatActivity() {
         super.onStart()
 
         binding.scanText.text = "Scanning..."
+        qrCodeScanner()
     }
 
     private fun qrCodeScanner() {
