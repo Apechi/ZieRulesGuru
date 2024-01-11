@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.zierulesguru.LoginActivity
 import com.example.zierulesguru.TinyDB
+import com.example.zierulesguru.dataSiswa.DataSiswaActivity
 import com.example.zierulesguru.databinding.ActivityProfileGuruBinding
 
 
@@ -46,6 +47,10 @@ class NotificationsFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             showLogoutConfirmationDialog()
+        }
+
+        binding.buttonDataSiswa.setOnClickListener {
+            startActivity(Intent(requireContext(), DataSiswaActivity::class.java))
         }
 
         return root

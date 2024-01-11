@@ -1,11 +1,11 @@
 package com.example.zierulesguru
 data class StudentData (
-    val status: Long,
+    val status: Int,
     val students: List<StudentElement>
 )
 
 data class StudentElement (
-    val id: Long,
+    val id: Int,
     val nis: String,
     val name: String,
     val image: String,

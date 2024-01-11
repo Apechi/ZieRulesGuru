@@ -29,14 +29,16 @@ class scanHistoryAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listDataScanHistory = dataListScanHistroy[position]
 
-        holder.type.text = listDataScanHistory.type
 
         if (listDataScanHistory.type == "violation") {
             holder.type.setBackgroundColor(Color.parseColor("#bb2124"))
+            holder.type.text = "Pelanggaran"
         } else if (listDataScanHistory.type == "achievment") {
             holder.type.setBackgroundColor(Color.parseColor("#22bb33"))
+            holder.type.text = "Prestasi"
         } else if (listDataScanHistory.type == "task") {
             holder.type.setBackgroundColor(Color.parseColor("#477CAC"))
+            holder.type.text = "Tugas"
         }
 
         holder.name.text = truncateString(listDataScanHistory.name, 5);
