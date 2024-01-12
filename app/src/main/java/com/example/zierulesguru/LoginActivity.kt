@@ -63,8 +63,8 @@ class LoginActivity : AppCompatActivity() {
             login(email, pass)
         }
 
-        APP_VERSION = BuildConfig.VERSION_NAME
-        binding.txtVersion.text = "ver ${APP_VERSION}"
+        APP_VERSION = BuildConfig.VERSION_NAME;
+
     }
 
 
