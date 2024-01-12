@@ -1,11 +1,14 @@
 package com.example.zierulesguru
 
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.android.volley.Request.Method
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.zierulesguru.databinding.ActivityLoginBinding
@@ -14,6 +17,7 @@ import com.example.zierulesguru.walikelas.WaliKelasActivity
 import com.google.gson.Gson
 import org.json.JSONObject
 
+
 data class DataProfile(
     val status: Int,
     val message: String,
@@ -21,16 +25,29 @@ data class DataProfile(
     val token: String,
 )
 
+data class Version (
+    val status: Int,
+    val data: Data
+)
+
+data class Data (
+    val version: String,
+    val releaseTime: String
+)
+
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
     lateinit var tinyDB: TinyDB
+    lateinit var APP_VERSION: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loadingSwitch(false)
 
         tinyDB = TinyDB(this)
         binding.buttonLogin.setOnClickListener {
@@ -45,24 +62,106 @@ class LoginActivity : AppCompatActivity() {
 
             login(email, pass)
         }
+
+        APP_VERSION = BuildConfig.VERSION_NAME
+        binding.txtVersion.text = "ver ${APP_VERSION}"
+    }
+
+
+    private fun needUpdate() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage("Aplikasi Perlu Di Update!")
+            .setCancelable(false)
+            .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id -> finish() })
+        val alert: AlertDialog = builder.create()
+        alert.show()
+    }
+
+    fun loadingSwitch(switch: Boolean) {
+        when (switch) {
+            true -> {
+                binding.loadingBackground.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            false -> {
+                binding.loadingBackground.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun checkVersion() {
+        loadingSwitch(true)
+        val queue = Volley.newRequestQueue(this)
+        val url = "${MyApplication.BASE_URL}/version"
+
+        val jsonRequest =  object : JsonObjectRequest(
+            Method.GET,
+            url,
+            null,
+            {res->
+                try {
+                    val gson = Gson()
+                    val versionJson = gson.fromJson(res.toString(), Version::class.java)
+                    if (versionJson.status == 200) {
+                       if (versionJson.data.version == APP_VERSION) {
+                           if (tinyDB.getBoolean("is_login")) {
+                               val role = tinyDB.getString("role")
+                               when (role) {
+                                   "wali-kelas" -> {
+                                       startActivity(Intent(this, WaliKelasActivity::class.java))
+                                       finish()
+                                   }
+                                   "guru-mapel" -> {
+                                       startActivity(Intent(this, GuruMapelActivity::class.java))
+                                       finish()
+                                   }
+                               }
+                           }
+                           loadingSwitch(false)
+                       } else {
+                           loadingSwitch(false)
+                           needUpdate()
+                       }
+                    } else {
+                        loadingSwitch(false)
+                        println(res.toString())
+                    }
+
+                } catch (e : Exception) {
+                    loadingSwitch(false)
+                    println(e.message.toString())
+                }
+
+            },
+            {err ->
+                println("tes")
+            }
+        ) {
+
+        }
+        queue.add(jsonRequest)
+
     }
 
 
     override fun onStart() {
         super.onStart()
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        if (!tinyDB.getBoolean("is_login")) {
-            return
-        }
 
-        val role = tinyDB.getString("role")
-        when (role) {
-            "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
-            "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))
-        }
+        checkVersion()
+
+
+
+
     }
+
+
+
+
+
+
 
     private fun login(email: String, pass: String) {
         val queue = Volley.newRequestQueue(this)
@@ -83,6 +182,7 @@ class LoginActivity : AppCompatActivity() {
                         tinyDB.putString("token", token)
                         tinyDB.putString("role", role)
                         tinyDB.putBoolean("is_login", true)
+                        Toast.makeText(this, "Berhasil Login!", Toast.LENGTH_SHORT).show()
                         when (role) {
                             "wali-kelas" -> startActivity(Intent(this, WaliKelasActivity::class.java))
                             "guru-mapel" -> startActivity(Intent(this, GuruMapelActivity::class.java))

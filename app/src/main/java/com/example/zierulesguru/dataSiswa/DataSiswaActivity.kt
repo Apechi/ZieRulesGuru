@@ -31,6 +31,8 @@ class DataSiswaActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+
+
         getSiswa()
 
         binding.swipeRefresh.setOnRefreshListener {
@@ -88,7 +90,7 @@ class DataSiswaActivity : AppCompatActivity() {
             },
             {
                 err->
-                Toast.makeText(this, err.message, Toast.LENGTH_SHORT).show()
+
 
             }
             ) {
